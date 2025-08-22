@@ -82,11 +82,6 @@ Found an error or have a suggestion?
 
 Feel free to use these guides for your AZ-305 preparation and share with the Azure community!
 
-## 🏆 Success Stories
-
-> *"These decision guides helped me pass AZ-305 on my first attempt. The comparison tables were exactly what I needed for the scenario-based questions."*  
-> *"Finally, architecture guides that focus on WHEN to use services, not just HOW they work."*
-
 ---
 
 ## 🔗 Additional Resources
