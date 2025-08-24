@@ -23,6 +23,7 @@ Each guide provides:
 |:-----:|:-----------:|:-------------------:|
 | [💾 **Storage Services**](./01-storage-services.md) | Databases, Files, Data Lakes | SQL Database, Cosmos DB, Storage Accounts, Synapse |
 | [🗄️ **Azure SQL**](./02-azure-sql.md) | SQL Deployment Options, Performance | SQL Database, SQL MI, SQL on VMs |
+| [📡 **Messaging & Analytics**](./03-azure-messaging-analytics.md) | Event Processing, Data Integration | Service Bus, Event Grid, Event Hubs, Data Factory |
 
 ## 🎓 How to Use These Guides
 
