@@ -22,6 +22,7 @@ Each guide provides:
 | Guide | Focus Areas | Key Services Covered |
 |:-----:|:-----------:|:-------------------:|
 | [💾 **Storage Services**](./01-storage-services.md) | Databases, Files, Data Lakes | SQL Database, Cosmos DB, Storage Accounts, Synapse |
+| [🗄️ **Azure SQL**](./02-azure-sql.md) | SQL Deployment Options, Performance | SQL Database, SQL MI, SQL on VMs |
 
 ## 🎓 How to Use These Guides
 
