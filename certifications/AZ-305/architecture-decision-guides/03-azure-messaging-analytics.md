@@ -675,7 +675,3 @@ Service Bus:
 - Understand the decision matrices by heart
 
 **Remember**: The AZ-305 tests your ability to design solutions, not just memorize features. Always think about trade-offs, costs, and real-world constraints!
-
----
-
-*Good luck with your AZ-305 exam! 🚀*
