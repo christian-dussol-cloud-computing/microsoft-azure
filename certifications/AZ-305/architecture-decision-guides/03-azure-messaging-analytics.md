@@ -104,8 +104,6 @@ Event Hubs → Automatic capture → Blob/ADLS
 - **Dead letter queue**: Failed events storage
 - **Event TTL**: 24 hours maximum
 
-
-
 ### 🔑 Trigger Keywords
 - "Event-driven"
 - "Serverless"
@@ -142,8 +140,6 @@ Event Hubs → Automatic capture → Blob/ADLS
 ```
 
 ### 🔧 Technical Deep-Dive
-
-
 
 #### Scaling Strategy
 - **Streaming Units (SUs)**: 1 SU = 1MB/s throughput
@@ -305,41 +301,175 @@ Right: Simple notifications → Event Grid
 
 ## 🎪 Advanced Architecture Patterns
 
-### Pattern 1: Lambda Architecture
-```
-Data Sources → Event Hubs
-                ├── Stream Analytics → Real-time views
-                └── Event Hubs Capture → Batch processing → Historical views
-```
-
-### Pattern 2: Event Sourcing + CQRS
-```
-Commands → Service Bus → Command Handlers
-                            ↓
-Write Model → Event Hubs (Event Store)
-                            ↓
-Read Models ← Stream Analytics ← Event Replay
-```
-
-### Pattern 3: Saga Pattern (Distributed Transactions)
-```
-Order Service → Service Bus → Payment Service
-     ↓                              ↓
-Compensation ← Service Bus ← Payment Failed
-```
-
-### Pattern 4: Multi-Cloud Event Routing
-```
-Azure Events → Event Grid → Event Hubs
-                               ↓
-External Systems ← Kafka Connect ← Event Hubs
+### **Pattern 1: Lambda Architecture**
+```mermaid
+graph TB
+    A[Data Sources<br/>Multiple Systems] --> B[Event Hubs<br/>Unified Ingestion]
+    
+    B --> C[Stream Analytics<br/>Real-time Processing]
+    B --> D[Event Hubs Capture<br/>Batch Storage]
+    
+    C --> E[Real-time Views<br/>Cosmos DB]
+    D --> F[Batch Processing<br/>Data Factory/Synapse]
+    F --> G[Historical Views<br/>Data Lake]
+    
+    E --> H[Unified Query Layer<br/>API Management]
+    G --> H
+    
+    H --> I[Applications<br/>Dashboards & Reports]
+    
+    style A fill:#f0f8ff
+    style B fill:#e6f3ff
+    style C fill:#cce7ff
+    style D fill:#cce7ff
+    style E fill:#b3dbff
+    style F fill:#b3dbff
+    style G fill:#99cfff
+    style H fill:#80c3ff
+    style I fill:#66b7ff
 ```
 
-### Pattern 5: IoT Analytics Pipeline
+### **Pattern 2: Event Sourcing + CQRS**
+```mermaid
+graph LR
+    A[Commands<br/>User Actions] --> B[Service Bus<br/>Command Queue]
+    B --> C[Command Handlers<br/>Business Logic]
+    
+    C --> D[Write Model<br/>Current State]
+    C --> E[Event Hubs<br/>Event Store]
+    
+    E --> F[Stream Analytics<br/>Event Replay]
+    F --> G[Read Models<br/>Projections]
+    
+    G --> H[Query APIs<br/>Read Operations]
+    D --> I[Command APIs<br/>Write Operations]
+    
+    style A fill:#f0f8ff
+    style B fill:#e6f3ff
+    style C fill:#cce7ff
+    style D fill:#b3dbff
+    style E fill:#b3dbff
+    style F fill:#99cfff
+    style G fill:#80c3ff
+    style H fill:#66b7ff
+    style I fill:#66b7ff
 ```
-IoT Devices → IoT Hub → Event Hubs → Stream Analytics
-                                          ├── Hot Path → Cosmos DB → Power BI
-                                          └── Cold Path → Data Lake → Batch Analytics
+
+### **Pattern 3: Saga Pattern (Distributed Transactions)**
+```mermaid
+graph TB
+    A[Order Service<br/>Initiate Transaction] --> B[Service Bus<br/>Order Created Event]
+    
+    B --> C[Payment Service<br/>Process Payment]
+    B --> D[Inventory Service<br/>Reserve Items]
+    B --> E[Shipping Service<br/>Schedule Delivery]
+    
+    C --> F{Payment Success?}
+    D --> G{Inventory Available?}
+    E --> H{Shipping Possible?}
+    
+    F -->|Yes| I[Payment Confirmed]
+    F -->|No| J[Service Bus<br/>Compensation Events]
+    
+    G -->|Yes| K[Items Reserved]
+    G -->|No| J
+    
+    H -->|Yes| L[Delivery Scheduled]
+    H -->|No| J
+    
+    J --> M[Compensation Handlers<br/>Rollback Actions]
+    M --> N[Order Cancelled<br/>Resources Released]
+    
+    I --> O[Order Completed<br/>All Services Success]
+    K --> O
+    L --> O
+    
+    style A fill:#f0f8ff
+    style B fill:#e6f3ff
+    style C fill:#cce7ff
+    style D fill:#cce7ff
+    style E fill:#cce7ff
+    style F fill:#ffe6e6
+    style G fill:#ffe6e6
+    style H fill:#ffe6e6
+    style J fill:#ffcccc
+    style M fill:#ffb3b3
+    style N fill:#ff9999
+    style O fill:#e6ffe6
+```
+
+### **Pattern 4: Multi-Cloud Event Routing**
+```mermaid
+graph TB
+    A[Azure Events<br/>Resource Changes] --> B[Event Grid<br/>Azure Native Events]
+    C[AWS Events<br/>CloudWatch] --> D[Event Bridge<br/>Cross-Cloud Router]
+    E[GCP Events<br/>Pub/Sub] --> F[Cloud Functions<br/>Event Transformer]
+    
+    B --> G[Event Hubs<br/>Unified Stream]
+    D --> H[Kafka Connect<br/>Cross-Cloud Bridge]
+    F --> I[HTTP Webhook<br/>Event Forwarder]
+    
+    H --> G
+    I --> G
+    
+    G --> J[Stream Analytics<br/>Multi-Cloud Processing]
+    J --> K[Unified Analytics<br/>Cross-Cloud Insights]
+    
+    K --> L[Multi-Cloud Dashboard<br/>Consolidated View]
+    
+    style A fill:#f0f8ff
+    style B fill:#e6f3ff
+    style C fill:#f0f8ff
+    style D fill:#e6f3ff
+    style E fill:#f0f8ff
+    style F fill:#e6f3ff
+    style G fill:#cce7ff
+    style H fill:#cce7ff
+    style I fill:#cce7ff
+    style J fill:#b3dbff
+    style K fill:#99cfff
+    style L fill:#80c3ff
+```
+
+### **Pattern 5: IoT Analytics Pipeline**
+```mermaid
+graph TB
+    A[IoT Devices<br/>Sensors & Actuators] --> B[IoT Hub<br/>Device Management]
+    B --> C[Event Hubs<br/>Telemetry Ingestion]
+    
+    C --> D[Stream Analytics<br/>Hot Path Processing]
+    C --> E[Event Hubs Capture<br/>Cold Path Storage]
+    
+    D --> F[Real-time Alerts<br/>Critical Thresholds]
+    D --> G[Live Dashboard<br/>Power BI Streaming]
+    
+    E --> H[Data Lake Gen2<br/>Historical Storage]
+    H --> I[Batch Analytics<br/>Azure Synapse]
+    H --> J[Machine Learning<br/>Predictive Models]
+    
+    F --> K[Event Grid<br/>Alert Distribution]
+    K --> L[Automated Response<br/>Logic Apps/Functions]
+    
+    I --> M[Business Intelligence<br/>Historical Reports]
+    J --> N[Predictive Insights<br/>Maintenance Alerts]
+    
+    L --> O[Action Systems<br/>Field Operations]
+    
+    style A fill:#f0f8ff
+    style B fill:#e6f3ff
+    style C fill:#cce7ff
+    style D fill:#b3dbff
+    style E fill:#b3dbff
+    style F fill:#ffe6e6
+    style G fill:#e6ffe6
+    style H fill:#99cfff
+    style I fill:#80c3ff
+    style J fill:#80c3ff
+    style K fill:#ffcccc
+    style L fill:#ccffcc
+    style M fill:#66b7ff
+    style N fill:#66b7ff
+    style O fill:#b3ffb3
 ```
 
 ---
@@ -436,8 +566,6 @@ Troubleshooting:
 • Dead letters → Review message handling logic
 ```
 
-
-
 ---
 
 ## 💰 Cost Optimization Strategies
@@ -446,123 +574,55 @@ Troubleshooting:
 ```
 Strategies:
 • Right-size throughput units based on usage patterns
-• Use auto-inflate judiciously
-• Archive to cheaper storage (Capture → Cool tier)
-• Consider dedicated clusters for predictable workloads
+• Use Event Hubs Capture instead of custom consumers
+• Implement data retention policies
+• Consider dedicated clusters for high-volume scenarios
 
-Cost model:
-• Standard: $0.028/million events + TU cost
-• Dedicated: Fixed monthly cost regardless of usage
+Monitoring:
+• Track throughput unit utilization
+• Monitor capture storage costs
+• Review partition distribution
 ```
 
-### Stream Analytics Cost Optimization
+### Stream Analytics Optimization
 ```
-SU sizing guidelines:
-• 1 SU handles ~1MB/s simple queries
-• Complex queries (joins, UDFs) need more SUs
-• Monitor SU utilization to avoid over-provisioning
+Performance tuning:
+• Optimize query complexity
+• Use appropriate windowing functions
+• Implement proper partitioning strategy
+• Scale streaming units based on demand
 
-Cost reduction:
-• Start/stop jobs for development environments
-• Use temporal queries efficiently
-• Minimize cross-partition operations
-```
-
-### Service Bus Cost Optimization
-```
-Tier selection:
-• Basic: Simple queues only
-• Standard: Topics, sessions, transactions
-• Premium: Dedicated resources, VNet integration
-
-Optimization tips:
-• Batch operations where possible
-• Use appropriate message retention periods
-• Monitor message size (impacts throughput)
+Cost management:
+• Use consumption-based pricing for variable workloads
+• Implement auto-pause for development environments
+• Monitor SU utilization and right-size accordingly
 ```
 
 ---
 
-## 🔒 Security & Compliance Deep-Dive
+## 🎯 Decision Framework
 
-### Identity & Access Management
+### 1. **Analyze Volume**
 ```
-Azure AD Integration:
-• Service principals for applications
-• Managed identities for Azure resources
-• Role-based access control (RBAC)
-• Custom roles for fine-grained permissions
-
-Service-specific RBAC:
-Event Hubs:
-• Azure Event Hubs Data Owner
-• Azure Event Hubs Data Sender  
-• Azure Event Hubs Data Receiver
-
-Service Bus:
-• Azure Service Bus Data Owner
-• Azure Service Bus Data Sender
-• Azure Service Bus Data Receiver
+High (>1M/sec) → Event Hubs
+Medium (1K-1M/sec) → Event Grid or Service Bus
+Low (<1K/sec) → Service Bus
 ```
 
-### Network Security
+### 2. **Identify Pattern**
 ```
-Private Endpoints:
-• Dedicated private IP in your VNet
-• Traffic stays on Microsoft backbone
-• DNS integration for seamless access
-
-Service Endpoints:
-• Restrict access to specific VNet subnets
-• No additional charges
-• Simpler than Private Endpoints
-
-Network Rules:
-• IP firewall rules
-• Virtual network rules
-• Trusted Microsoft services bypass
+Streaming data → Event Hubs
+Event notifications → Event Grid
+Reliable messaging → Service Bus
+Real-time processing → Stream Analytics
 ```
 
-### Encryption & Compliance
+### 3. **Evaluate Requirements**
 ```
-Encryption at Rest:
-• Customer-managed keys (CMK) with Key Vault
-• Service-managed keys (default)
-• Key rotation automation
-
-Encryption in Transit:
-• TLS 1.2 minimum
-• Certificate pinning options
-• Perfect Forward Secrecy
-
-Compliance Certifications:
-• SOC 1/2/3, ISO 27001, HIPAA, PCI DSS
-• Regional data residency options
-• Audit logging via Azure Monitor
-```
-
----
-
-## 🎯 AZ-305 Exam Strategy
-
-### Decision Tree for the Exam
-```
-1. Analyze Volume
-   High (>1M/sec) → Event Hubs
-   Medium (1K-1M/sec) → Event Grid or Service Bus
-   Low (<1K/sec) → Service Bus
-
-2. Identify Pattern
-   Streaming data → Event Hubs
-   Event notifications → Event Grid
-   Reliable messaging → Service Bus
-   Real-time processing → Stream Analytics
-
-3. Evaluate Requirements
-   Ordering required → Service Bus with sessions
-   Fan-out needed → Event Grid or Service Bus Topics
-   Analytics needed → Stream Analytics
-   Archival needed → Event Hubs Capture
+Ordering required → Service Bus with sessions
+Fan-out needed → Event Grid or Service Bus Topics
+Analytics needed → Stream Analytics
+Archival needed → Event Hubs Capture
 ```
 
 ### Typical Exam Scenarios
@@ -649,8 +709,6 @@ Service Bus:
 • Standard: ~2,000 msg/sec per queue
 • Premium: ~4,000 msg/sec per messaging unit
 ```
-
-
 
 ---
 
