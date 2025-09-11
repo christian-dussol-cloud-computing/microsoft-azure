@@ -21,7 +21,7 @@ Each guide provides:
 
 | Guide | Focus Areas | Key Services Covered |
 |:-----:|:-----------:|:-------------------:|
-| [💾 **Storage Services**](./01-storage-services.md) | Databases, Files, Data Lakes | SQL Database, Cosmos DB, Storage Accounts, Synapse |
+| [💾 **Storage Services**](./01-azure-storage-services.md) | Databases, Files, Data Lakes | SQL Database, Cosmos DB, Storage Accounts, Synapse |
 | [🗄️ **Azure SQL Services**](./02-azure-sql-services.md) | SQL Deployment Options, Performance | SQL Database, SQL MI, SQL on VMs |
 | [📡 **Messaging & Analytics**](./03-azure-messaging-analytics.md) | Event Processing, Data Integration | Service Bus, Event Grid, Event Hubs, Data Factory |
 | [🚀 **Compute Services**](./04-azure-compute-services.md) | Containers, Serverless, VMs | AKS, Container Apps, Functions, Logic Apps, VMs |
