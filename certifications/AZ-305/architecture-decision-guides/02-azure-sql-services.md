@@ -55,7 +55,7 @@
 
 ---
 
-## 🔍 Decision Matrix
+## 📊 Decision Matrix
 
 | Criteria | <center>Azure SQL DB</center> | <center>SQL MI</center> | <center>SQL on VM</center> |
 |---------|--------------|---------|------------|
@@ -104,7 +104,7 @@
   1. Database Migration Assistant (DMA)
   2. Azure Database Migration Service
   3. Application connection string update
-⚠️  Challenges: Feature compatibility (~85%)
+⚠️ Challenges: Feature compatibility (~85%)
 ```
 
 #### **Path 2: SQL Managed Instance**
@@ -114,7 +114,7 @@
   1. Network setup (VNet, NSG)
   2. Azure Database Migration Service
   3. Minimal application changes
-⚠️  Challenges: Network complexity, cost
+⚠️ Challenges: Network complexity, cost
 ```
 
 #### **Path 3: SQL on VM**
@@ -124,7 +124,7 @@
   1. VM sizing and configuration
   2. Backup/restore or replication
   3. Network and security setup
-⚠️  Challenges: Management overhead, patching
+⚠️ Challenges: Management overhead, patching
 ```
 
 ### Cross-Cloud Migration
@@ -134,7 +134,7 @@
 
 ---
 
-## 🌐 Hybrid & Multi-Cloud Scenarios
+## 🌍 Hybrid & Multi-Cloud Scenarios
 
 ### **Hybrid Deployments**
 ```
@@ -256,23 +256,49 @@ Cost Keywords:
 ```
 
 ### 2. **Decision Tree Approach**
-```
-Start: What's the primary requirement?
-
-├── Migration from SQL Server?
-│   ├── Complex features needed? → SQL MI
-│   ├── OS control required? → SQL on VM  
-│   └── Modern app architecture? → SQL Database
-│
-├── New cloud-native application?
-│   ├── Variable workload? → SQL Database Serverless
-│   ├── Multi-tenant? → SQL Database + Elastic Pools
-│   └── High performance? → SQL Database Business Critical
-│
-└── Hybrid/On-premises integration?
-    ├── Network isolation required? → SQL MI
-    ├── Always On replication? → SQL on VM
-    └── Simple sync requirements? → SQL Database + Data Sync
+```mermaid
+graph TD
+    A[What's the primary requirement?] --> B{Migration from SQL Server?}
+    A --> C{New cloud-native application?}
+    A --> D{Hybrid/On-premises integration?}
+    
+    B --> B1{Complex features needed?}
+    B --> B2{OS control required?}
+    B --> B3{Modern app architecture?}
+    
+    B1 --> B1A[SQL Managed Instance<br/>100% Compatibility]
+    B2 --> B2A[SQL on VM<br/>Full Control]
+    B3 --> B3A[SQL Database<br/>Cloud-Native]
+    
+    C --> C1{Variable workload?}
+    C --> C2{Multi-tenant?}
+    C --> C3{High performance?}
+    
+    C1 --> C1A[SQL Database Serverless<br/>Auto-pause & Scale]
+    C2 --> C2A[SQL Database + Elastic Pools<br/>Resource Sharing]
+    C3 --> C3A[SQL Database Business Critical<br/>High Performance]
+    
+    D --> D1{Network isolation required?}
+    D --> D2{Always On replication?}
+    D --> D3{Simple sync requirements?}
+    
+    D1 --> D1A[SQL Managed Instance<br/>VNet Integration]
+    D2 --> D2A[SQL on VM<br/>Always On AG]
+    D3 --> D3A[SQL Database + Data Sync<br/>Simple Integration]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style B1A fill:#ffcdd2
+    style B2A fill:#ffe0b2
+    style B3A fill:#c8e6c9
+    style C1A fill:#bbdefb
+    style C2A fill:#f8bbd9
+    style C3A fill:#d1c4e9
+    style D1A fill:#dcedc8
+    style D2A fill:#ffccbc
+    style D3A fill:#b3e5fc
 ```
 
 ### 3. **Cost Optimization Patterns**
