@@ -26,7 +26,7 @@ Each guide provides:
 | [📡 **Messaging & Analytics**](./03-azure-messaging-analytics.md) | Event Processing, Data Integration | Service Bus, Event Grid, Event Hubs, Data Factory |
 | [🚀 **Compute Services**](./04-azure-compute-services.md) | Containers, Serverless, VMs | AKS, Container Apps, Functions, Logic Apps, VMs |
 | [🌐 **Networking Services**](./05-azure-networking-services.md) | Connectivity, Load Balancing | VNet, Application Gateway, Front Door, VPN Gateway |
-| [🔒 **Security & Identity**](./06-azure-security-identity.md) | Authentication, Authorization, Secrets | Entra ID, Key Vault, Sentinel, Defender, WAF |
+| [🔒 **Security & Identity**](./06-azure-security-identity-services.md) | Authentication, Authorization, Secrets | Entra ID, Key Vault, Sentinel, Defender, WAF |
 
 ## 🎓 How to Use These Guides
 
