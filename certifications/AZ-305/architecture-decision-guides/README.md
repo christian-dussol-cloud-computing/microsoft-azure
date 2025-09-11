@@ -25,6 +25,7 @@ Each guide provides:
 | [🗄️ **Azure SQL Services**](./02-azure-sql-services.md) | SQL Deployment Options, Performance | SQL Database, SQL MI, SQL on VMs |
 | [📡 **Messaging & Analytics**](./03-azure-messaging-analytics.md) | Event Processing, Data Integration | Service Bus, Event Grid, Event Hubs, Data Factory |
 | [🚀 **Compute Services**](./04-azure-compute-services.md) | Containers, Serverless, VMs | AKS, Container Apps, Functions, Logic Apps, VMs |
+| [🌐 **Networking Services**](./05-azure-networking-services.md) | Connectivity, Load Balancing | VNet, Application Gateway, Front Door, VPN Gateway |
 
 ## 🎓 How to Use These Guides
 
