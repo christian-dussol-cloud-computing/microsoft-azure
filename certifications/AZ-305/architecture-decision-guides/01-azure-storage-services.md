@@ -60,7 +60,6 @@
   - Asynchronous replication to secondary region
   - Protects against regional disasters
   - No read access to secondary region unless failover
-  - Use case: Backup and disaster recovery scenarios
 
 - **RA-GRS (Read-Access Geo Redundant Storage):**
   - **6 copies total:** Same as GRS + read access to secondary region
@@ -221,9 +220,26 @@ Data Lake Gen2 inherits all Blob Storage replication options:
 - **Private endpoints:** Network isolation
 
 ### **Typical Data Pipeline**
-**Raw Data → Data Lake Gen2 → Azure Synapse → Power BI**
-**↓**
-**Azure Databricks → ML Models**
+```mermaid
+graph LR
+    A[Raw Data<br/>Sources] --> B[Data Lake Gen2<br/>Bronze Layer]
+    B --> C[Azure Synapse<br/>Data Warehouse]
+    B --> D[Azure Databricks<br/>ML Processing]
+    C --> E[Power BI<br/>Dashboards]
+    D --> F[ML Models<br/>& Insights]
+    
+    B --> G[Stream Analytics<br/>Real-time Path]
+    G --> H[Hot Path<br/>Immediate Insights]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+    style G fill:#e3f2fd
+    style H fill:#f8bbd9
+```
 
 ### ❌ Avoid When
 - Simple file storage needs
@@ -327,23 +343,68 @@ Data Lake Gen2 inherits all Blob Storage replication options:
 ## 🎪 Real-World Architecture Patterns
 
 ### **Pattern 1: Modern Web Application**
-- **CDN → Blob Storage** (static content, RA-GRS)
-- **Load Balancer → VMs** with Premium SSD (ZRS)
-- **Azure Files →** Shared configuration/logs (LRS)
+```mermaid
+graph TD
+    A[CDN<br/>Global Edge] --> B[Blob Storage<br/>Static Content, RA-GRS]
+    C[Load Balancer<br/>Traffic Distribution] --> D[VMs with Premium SSD<br/>Application Layer, ZRS]
+    E[Azure Files<br/>Shared Storage, LRS] --> F[Configuration & Logs<br/>Shared Across VMs]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+```
 
 ### **Pattern 2: Data Analytics Platform**
-- **Data Sources → Data Lake Gen2 (GZRS) → Synapse Analytics**
-- **↓ Power BI Dashboards**
+```mermaid
+graph TB
+    A[Data Sources<br/>Multiple Systems] --> B[Data Lake Gen2<br/>Raw Storage, GZRS]
+    B --> C[Synapse Analytics<br/>Data Warehouse]
+    C --> D[Power BI<br/>Business Intelligence]
+    B --> E[Azure ML<br/>Machine Learning]
+    E --> F[ML Models<br/>Predictive Analytics]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+```
 
 ### **Pattern 3: Enterprise Backup Strategy**
-- **On-premises → Azure Files** (sync, ZRS)
-- **VMs → Managed Disk Snapshots** (cross-region)
-- **Archives → Blob Storage** (Archive tier, GRS)
+```mermaid
+graph LR
+    A[On-premises<br/>File Servers] --> B[Azure Files<br/>File Sync, ZRS]
+    C[Virtual Machines<br/>Production] --> D[Managed Disk<br/>Snapshots, Cross-region]
+    E[Archive Data<br/>Compliance] --> F[Blob Storage<br/>Archive Tier, GRS]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+```
 
 ### **Pattern 4: Microservices Platform**
-- **AKS with persistent volumes →** Azure Disks (ZRS)/Files (ZRS)
-- **Application data →** Cosmos DB
-- **Static assets →** Blob Storage + CDN (RA-GRS)
+```mermaid
+graph TD
+    A[AKS Cluster<br/>Container Orchestration] --> B[Persistent Volumes<br/>Azure Disks/Files, ZRS]
+    C[Application Data<br/>Microservices] --> D[Cosmos DB<br/>Global Distribution]
+    E[Static Assets<br/>Web Content] --> F[Blob Storage<br/>Content Storage]
+    F --> G[CDN<br/>Global Delivery, RA-GRS]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+    style G fill:#e3f2fd
+```
 
 ---
 
