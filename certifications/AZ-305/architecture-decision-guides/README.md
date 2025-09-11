@@ -27,6 +27,7 @@ Each guide provides:
 | [🚀 **Compute Services**](./04-azure-compute-services.md) | Containers, Serverless, VMs | AKS, Container Apps, Functions, Logic Apps, VMs |
 | [🌐 **Networking Services**](./05-azure-networking-services.md) | Connectivity, Load Balancing | VNet, Application Gateway, Front Door, VPN Gateway |
 | [🔒 **Security & Identity**](./06-azure-security-identity-services.md) | Authentication, Authorization, Secrets | Entra ID, Key Vault, Sentinel, Defender, WAF |
+| [📊 **Monitoring & Governance**](./07-azure-monitoring-governance-services.md) | Observability, FinOps, Compliance | Azure Monitor, Log Analytics, Policy, Cost Management |
 
 ## 🎓 How to Use These Guides
 
