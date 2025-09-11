@@ -2,7 +2,7 @@
 ![Azure](https://img.shields.io/badge/Cloud-Azure-007FFF)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-# 🏗️ AZ-305 Architecture Decision Guides
+# 🏗️ AZ-305 Solution Architecture Guides
 
 > Practical decision guides for **Azure Solutions Architect Expert (AZ-305)** exam preparation
 
