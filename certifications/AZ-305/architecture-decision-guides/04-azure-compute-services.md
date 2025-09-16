@@ -63,7 +63,7 @@
 
 **Key features for exam:**
 - **Cluster autoscaler** + **Horizontal Pod Autoscaler**
-- **Azure AD integration** for RBAC
+- **Entra ID integration** for RBAC
 - **Azure CNI** vs **Kubenet** networking
 - **Private clusters** for security
 - **Azure Policy** integration for governance
@@ -455,7 +455,7 @@ Logic Apps → On-premises Gateway → Functions → Azure Storage
 ### **Identity & Access Management**
 
 - **Managed Identity**: Supported by all services
-- **Azure AD Integration**: Native support varies
+- **Entra ID Integration**: Native support varies
 - **RBAC**: Most granular in AKS
 - **Key Vault Integration**: Available across services
 
