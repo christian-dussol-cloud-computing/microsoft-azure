@@ -215,7 +215,7 @@ Data Lake Gen2 inherits all Blob Storage replication options:
 
 ### **Security Features**
 - **POSIX ACLs:** Fine-grained permissions
-- **Azure AD integration:** Enterprise identity
+- **Entra ID integration:** Enterprise identity
 - **Encryption:** At rest and in transit
 - **Private endpoints:** Network isolation
 
@@ -316,7 +316,7 @@ graph LR
 ## 🔒 Security Best Practices
 
 ### **Access Control**
-- **Azure AD integration** for identity-based access
+- **Entra ID integration** for identity-based access
 - **Shared Access Signatures (SAS)** for temporary access
 - **Stored access policies** for centralized management
 - **Private endpoints** for network isolation
