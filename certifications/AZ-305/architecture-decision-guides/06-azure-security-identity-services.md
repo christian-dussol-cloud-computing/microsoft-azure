@@ -14,9 +14,9 @@
 
 ---
 
-## 🔍 Azure Active Directory (Azure AD) - Identity Foundation
+## 🔍 Azure Active Directory (Entra ID) - Identity Foundation
 
-### 🎯 When to Choose Azure AD
+### 🎯 When to Choose Entra ID
 - ✅ **Enterprise identity** management
 - ✅ **Single Sign-On (SSO)** across applications
 - ✅ **Multi-factor authentication** (MFA)
@@ -52,9 +52,9 @@ Policy Components:
 
 ### **Common Patterns**
 ```
-Internal Users: Azure AD + MFA + Conditional Access
+Internal Users: Entra ID + MFA + Conditional Access
 External Partners: B2B guest access + MFA
-Customers: Azure AD B2C + social identity
+Customers: Entra ID B2C + social identity
 Applications: Service principals + managed identity
 ```
 
@@ -160,7 +160,7 @@ Calculation: (Completed recommendations / Total recommendations) × 100
 ### **Data Connectors**
 ```
 Microsoft Services:
-- Azure Activity, Office 365, Azure AD
+- Azure Activity, Office 365, Entra ID
 - Microsoft 365 Defender, Cloud App Security
 
 Third-party:
@@ -253,7 +253,7 @@ Custom Rules:
 ### **Implementation Strategy**
 ```
 Identity Layer:
-├── Azure AD + Conditional Access
+├── Entra ID + Conditional Access
 ├── Multi-factor Authentication
 └── Privileged Identity Management
 
@@ -280,10 +280,10 @@ Data Layer:
 ### **Enterprise Identity Management**
 | <div style="text-align: center">Requirement</div> | <div style="text-align: center">Solution</div> |
 |-------------|----------|
-| **Employee SSO** | Azure AD Premium P1 + Conditional Access |
-| **Partner Access** | Azure AD B2B + Guest access policies |
-| **Customer Identity** | Azure AD B2C + Social identity providers |
-| **Privileged Access** | Azure AD PIM + Just-in-time access |
+| **Employee SSO** | Entra ID Premium P1 + Conditional Access |
+| **Partner Access** | Entra ID B2B + Guest access policies |
+| **Customer Identity** | Entra ID B2C + Social identity providers |
+| **Privileged Access** | Entra ID PIM + Just-in-time access |
 
 ### **Application Security**
 | <div style="text-align: center">Application Type</div> | <div style="text-align: center">Security Solution</div> |
@@ -316,17 +316,17 @@ Data Layer:
 ### **Licensing Strategy**
 ```
 Start Small:
-- Azure AD Free for basic needs
+- Entra ID Free for basic needs
 - Security Center Free tier
 - Key Vault standard tier
 
 Scale Up:
-- Azure AD Premium P1 for conditional access
+- Entra ID Premium P1 for conditional access
 - Defender for Cloud paid plans
 - Sentinel pay-as-you-go
 
 Enterprise:
-- Azure AD Premium P2 for full features
+- Entra ID Premium P2 for full features
 - Microsoft 365 E5 bundling
 - Reserved capacity for predictable workloads
 ```
@@ -413,7 +413,7 @@ graph TB
 ### **Pattern 2: Zero Trust Internal App**
 ```mermaid
 graph TB
-    A[User<br/>Employee/Partner] --> B[Azure AD<br/>Identity Verification]
+    A[User<br/>Employee/Partner] --> B[Entra ID<br/>Identity Verification]
     B --> C[Multi-Factor Auth<br/>Additional Security]
     C --> D[Conditional Access<br/>Policy Evaluation]
     D --> E[Application Proxy<br/>Secure Tunnel]
