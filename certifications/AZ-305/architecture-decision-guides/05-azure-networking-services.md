@@ -372,7 +372,7 @@ graph TB
 ```mermaid
 graph TB
     A[User/Device] --> B[Conditional Access<br/>Identity Verification]
-    B --> C[Azure AD<br/>Authentication]
+    B --> C[Entra ID<br/>Authentication]
     C --> D[Application Proxy<br/>Secure Access]
     D --> E[Private Endpoints<br/>No Internet Exposure]
     E --> F[Protected Resources<br/>Zero Trust Access]
@@ -497,7 +497,7 @@ graph LR
     C --> D[AWS Direct Connect<br/>Cross-Cloud Link]
     D --> E[AWS VPC<br/>Cloud Workloads]
     
-    C --> F[Hybrid Identity<br/>Azure AD Connect]
+    C --> F[Hybrid Identity<br/>Entra ID Connect]
     C --> G[Monitoring Hub<br/>Unified Operations]
     C --> H[Security Center<br/>Cross-Cloud Security]
     
@@ -524,7 +524,7 @@ Network Segmentation:
 └── Data perimeter (Private Link + Encryption)
 
 Identity-based Access:
-├── User identity (Azure AD + Conditional Access)
+├── User identity (Entra ID + Conditional Access)
 ├── Device identity (Device compliance)
 ├── Application identity (Managed Identity)
 └── Service identity (Service Principals)
