@@ -34,7 +34,7 @@ Complete decision guides: [Azure Solution Architecture Guides](../README.md)
 
 ---
 
-*Christian Dussol | Senior Engineering Manager*  
+*[Christian Dussol](https://www.linkedin.com/in/christiandussol/)*  
 *Microsoft Certified: Azure Solutions Architect Expert*
 
 **⭐ Star this repository if it helps with your AZ-305 preparation**
